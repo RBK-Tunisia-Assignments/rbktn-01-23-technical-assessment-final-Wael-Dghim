@@ -1,11 +1,20 @@
 import React from "react";
 import "../App.css";
+import axios from "axios";
 
 const RecepieCard = ({ recipe }) => {
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:4000/api/${recipe.recepie_Id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <div className="card">
-        <button className="delete">delete</button>
+        <button onClick={handleDelete} className="delete">
+          delete
+        </button>
         <button className="update">update </button>
 
         <>

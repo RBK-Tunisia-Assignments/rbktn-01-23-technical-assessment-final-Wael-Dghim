@@ -14,7 +14,15 @@ const addRecipe = (req, res) => {
   });
 };
 
+const deleteRecipe = (req, res) => {
+  model.deleteOne(req.params.id, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 module.exports = {
   getrecepie,
   addRecipe,
+  deleteRecipe,
 };

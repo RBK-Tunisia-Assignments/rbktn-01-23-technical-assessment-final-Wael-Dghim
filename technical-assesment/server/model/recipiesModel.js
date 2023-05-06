@@ -16,4 +16,11 @@ const addOne = (recipe, callback) => {
     callback(err, result);
   });
 };
-module.exports = { getAll, addOne };
+
+const deleteOne = (id, callback) => {
+  const sql = `DELETE FROM recepie WHERE recepie_Id=${id}`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+module.exports = { getAll, addOne, deleteOne };
