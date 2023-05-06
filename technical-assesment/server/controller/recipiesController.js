@@ -7,6 +7,14 @@ const getrecepie = (req, res) => {
   });
 };
 
+const addRecipe = (req, res) => {
+  model.addOne(req.body, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 module.exports = {
   getrecepie,
+  addRecipe,
 };

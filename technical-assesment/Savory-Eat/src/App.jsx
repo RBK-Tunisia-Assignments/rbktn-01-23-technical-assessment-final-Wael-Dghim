@@ -4,6 +4,7 @@ import axios from "axios";
 import "./App.css";
 import Home from "./components/Home.jsx";
 import AllRecepies from "./components/AllRecipies.jsx";
+import Add from "./components/Add";
 
 function App() {
   const [view, setView] = useState("Home");
@@ -50,6 +51,7 @@ function App() {
       </nav>
       {view === "Home" && <Home changeView={changeView} />}
       {view === "Allrecepies" && <AllRecepies recipes={recipes} />}
+      {view === "Addrecepie" && <Add />}
 
       <div></div>
     </div>

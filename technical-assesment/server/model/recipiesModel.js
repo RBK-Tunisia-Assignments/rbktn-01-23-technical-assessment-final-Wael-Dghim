@@ -8,4 +8,12 @@ const getAll = (callback) => {
     callback(err, result);
   });
 };
-module.exports = { getAll };
+
+const addOne = (recipe, callback) => {
+  const { name, cookTime, prepTime, serve, category, desc, ing, src } = recipe;
+  const sql = `INSERT INTO recepie SET recepie_Name='${name}', Cook_Time='${cookTime}', Prep_Time='${prepTime}', Serves='${serve}', categorie='${category}', recepie_Image='${src}', recepie_Description='${desc}', recepie_Ingredients='${ing}',  users_user_Id=1`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+module.exports = { getAll, addOne };
