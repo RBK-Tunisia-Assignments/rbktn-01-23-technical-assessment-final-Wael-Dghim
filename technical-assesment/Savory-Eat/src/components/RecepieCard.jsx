@@ -5,7 +5,6 @@ import Update from "./Update";
 
 const RecepieCard = ({ recipe }) => {
   const [showUpdate, setShowUpdate] = useState(false);
-  console.log(recipe);
   const handleDelete = () => {
     axios
       .delete(`http://localhost:4000/api/${recipe.recepie_Id}`)

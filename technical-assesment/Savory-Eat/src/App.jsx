@@ -8,6 +8,7 @@ import Add from "./components/Add";
 
 function App() {
   const [view, setView] = useState("Home");
+  const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
   let changeView = (view) => {
     setView(view);
@@ -18,6 +19,17 @@ function App() {
       .get("http://localhost:4000/api/menuItems")
       .then((res) => setRecipes(res.data));
   }, []);
+
+  const handleSearch = () => {
+    axios
+      .post(
+        "http://localhost:4000/api/search",
+        { search },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((res) => setRecipes(res.data))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="App">
       <nav className="nav">
@@ -44,8 +56,12 @@ function App() {
           Addrecepie
         </div>
         <div className="nav-item" active-color="red">
-          <input type="text" />
-          <button>search</button>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button onClick={handleSearch}>search</button>
         </div>
         <span className="nav-indicator"></span>
       </nav>

@@ -28,9 +28,17 @@ const updateRecipe = (req, res) => {
   });
 };
 
+const searchRecipe = (req, res) => {
+  model.search(req.body.search, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 module.exports = {
   getrecepie,
   addRecipe,
   deleteRecipe,
   updateRecipe,
+  searchRecipe,
 };

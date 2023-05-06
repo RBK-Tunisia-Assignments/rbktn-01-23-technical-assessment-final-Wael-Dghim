@@ -31,4 +31,12 @@ const updateOne = (id, recipe, callback) => {
     callback(err, result);
   });
 };
-module.exports = { getAll, addOne, deleteOne, updateOne };
+
+const search = (q, callback) => {
+  const sql = `SELECT * FROM recepie WHERE recepie_Name LIKE '${q}%'`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+
+module.exports = { getAll, addOne, deleteOne, updateOne, search };
