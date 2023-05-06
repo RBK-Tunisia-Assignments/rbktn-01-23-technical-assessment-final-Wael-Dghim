@@ -1,16 +1,22 @@
 //the default user to update and delete is {user_Id:1,username:'testuser',email:'test@test.com',password:'password}
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./App.css";
 import Home from "./components/Home.jsx";
 import AllRecepies from "./components/AllRecipies.jsx";
-import data from "./data/data.json";
 
 function App() {
   const [view, setView] = useState("Home");
-  const [recipes, setRecipes] = useState(data);
+  const [recipes, setRecipes] = useState([]);
   let changeView = (view) => {
     setView(view);
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/menuItems")
+      .then((res) => setRecipes(res.data));
+  }, []);
   return (
     <div className="App">
       <nav className="nav">
