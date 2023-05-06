@@ -35,10 +35,34 @@ const searchRecipe = (req, res) => {
   });
 };
 
+const favRecipe = (req, res) => {
+  model.findFav(req.params.id, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
+const addFavRecipe = (req, res) => {
+  model.addFav(req.body.id, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
+const removeFavRecipe = (req, res) => {
+  model.removeFav(req.params.id, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 module.exports = {
   getrecepie,
   addRecipe,
   deleteRecipe,
   updateRecipe,
   searchRecipe,
+  favRecipe,
+  addFavRecipe,
+  removeFavRecipe,
 };

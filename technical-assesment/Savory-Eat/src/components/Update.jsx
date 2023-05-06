@@ -3,37 +3,41 @@ import React from "react";
 
 const Update = ({ recipe }) => {
   const handleSubmit = () => {
-    const name = document.getElementById("name").value;
-    const cookTime = document.getElementById("cook").value;
-    const prepTime = document.getElementById("prep").value;
-    const serve = document.getElementById("serves").value;
-    const cat = document.getElementById("cat").value;
-    const desc = document.getElementById("desc").value;
-    const ing = document.getElementById("ing").value;
-    const src = document.getElementById("src").value;
+    if (recipe.users_user_Id === 1) {
+      const name = document.getElementById("name").value;
+      const cookTime = document.getElementById("cook").value;
+      const prepTime = document.getElementById("prep").value;
+      const serve = document.getElementById("serves").value;
+      const cat = document.getElementById("cat").value;
+      const desc = document.getElementById("desc").value;
+      const ing = document.getElementById("ing").value;
+      const src = document.getElementById("src").value;
 
-    const updatedRecipe = {
-      name,
-      cookTime,
-      prepTime,
-      serve,
-      category: cat,
-      desc,
-      ing,
-      src,
-    };
-    axios
-      .put(
-        `http://localhost:4000/api/update/${recipe.recepie_Id}`,
-        updatedRecipe,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      const updatedRecipe = {
+        name,
+        cookTime,
+        prepTime,
+        serve,
+        category: cat,
+        desc,
+        ing,
+        src,
+      };
+      axios
+        .put(
+          `http://localhost:4000/api/update/${recipe.recepie_Id}`,
+          updatedRecipe,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    } else {
+      alert("not your recipe");
+    }
   };
   return (
     <div className="add-recipe-form ">

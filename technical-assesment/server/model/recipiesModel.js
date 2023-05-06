@@ -39,4 +39,34 @@ const search = (q, callback) => {
   });
 };
 
-module.exports = { getAll, addOne, deleteOne, updateOne, search };
+const findFav = (id, callback) => {
+  const sql = `SELECT * FROM favorites WHERE recepie_id=${id}`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+
+const addFav = (id, callback) => {
+  const sql = `INSERT INTO favorites SET recepie_id=${id}, users_id=1`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+
+const removeFav = (id, callback) => {
+  const sql = `DELETE FROM favorites WHERE recepie_id=${id}`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+
+module.exports = {
+  getAll,
+  addOne,
+  deleteOne,
+  updateOne,
+  search,
+  findFav,
+  addFav,
+  removeFav,
+};

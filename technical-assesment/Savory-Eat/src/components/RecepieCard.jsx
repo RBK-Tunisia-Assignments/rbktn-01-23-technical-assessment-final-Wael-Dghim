@@ -1,16 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
 import Update from "./Update";
 
 const RecepieCard = ({ recipe }) => {
   const [showUpdate, setShowUpdate] = useState(false);
+  const [fav, setFav] = useState(null);
+
   const handleDelete = () => {
+    if (recipe.users_user_Id === 1) {
+      axios
+        .delete(`http://localhost:4000/api/${recipe.recepie_Id}`)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    } else {
+      alert("not your recipe");
+    }
+  };
+
+  const addFav = () => {
     axios
-      .delete(`http://localhost:4000/api/${recipe.recepie_Id}`)
+      .post(
+        `http://localhost:4000/api/fav`,
+        { id: recipe.recepie_Id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+
+  const removeFav = () => {
+    axios
+      .delete(`http://localhost:4000/api/fav/${recipe.recepie_Id}`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/api/fav/${recipe.recepie_Id}`)
+      .then((res) => {
+        if (res.data.length) setFav(true);
+        else setFav(false);
+      });
+  }, []);
+
   return (
     <>
       <div className="card">
@@ -31,6 +69,11 @@ const RecepieCard = ({ recipe }) => {
             <i>Serves: {recipe.Serves}</i>
           </div>
         </>
+        {!fav ? (
+          <button onClick={addFav}>Add to favorites</button>
+        ) : (
+          <button onClick={removeFav}>Remove from favorites</button>
+        )}
       </div>
     </>
   );
