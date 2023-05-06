@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import axios from "axios";
+import Update from "./Update";
 
 const RecepieCard = ({ recipe }) => {
+  const [showUpdate, setShowUpdate] = useState(false);
+  console.log(recipe);
   const handleDelete = () => {
     axios
       .delete(`http://localhost:4000/api/${recipe.recepie_Id}`)
@@ -15,8 +18,10 @@ const RecepieCard = ({ recipe }) => {
         <button onClick={handleDelete} className="delete">
           delete
         </button>
-        <button className="update">update </button>
-
+        <button onClick={() => setShowUpdate(!showUpdate)} className="update">
+          update{" "}
+        </button>
+        {showUpdate ? <Update recipe={recipe} /> : ""}
         <>
           <div className="header">
             <img className="img" src={recipe.recepie_Image} alt="" />

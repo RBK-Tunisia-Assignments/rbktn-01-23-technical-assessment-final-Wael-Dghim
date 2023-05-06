@@ -21,8 +21,16 @@ const deleteRecipe = (req, res) => {
   });
 };
 
+const updateRecipe = (req, res) => {
+  model.updateOne(req.params.id, req.body, (err, result) => {
+    if (err) res.status(500).json(err);
+    res.status(200).json(result);
+  });
+};
+
 module.exports = {
   getrecepie,
   addRecipe,
   deleteRecipe,
+  updateRecipe,
 };

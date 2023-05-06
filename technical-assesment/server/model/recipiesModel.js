@@ -23,4 +23,12 @@ const deleteOne = (id, callback) => {
     callback(err, result);
   });
 };
-module.exports = { getAll, addOne, deleteOne };
+
+const updateOne = (id, recipe, callback) => {
+  const { name, cookTime, prepTime, serve, category, desc, ing, src } = recipe;
+  const sql = `UPDATE recepie SET recepie_Name='${name}', Cook_Time='${cookTime}', Prep_Time='${prepTime}', Serves='${serve}', categorie='${category}', recepie_Image='${src}', recepie_Description='${desc}', recepie_Ingredients='${ing}' WHERE recepie_Id=${id}`;
+  connection.query(sql, (err, result) => {
+    callback(err, result);
+  });
+};
+module.exports = { getAll, addOne, deleteOne, updateOne };
